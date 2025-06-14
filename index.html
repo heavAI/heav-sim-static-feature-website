@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern Contractor App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <style>
+    :root {
+      --primary: #840bda;
+      --accent: #a55ae8;
+      --background: #0f0f0f;
+      --text: #f3f3f3;
+      --muted: #999;
+      --light: #1e1e1e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      font-weight: 700;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+      text-decoration-thickness: 3px;
+      text-underline-offset: 6px;
+      text-decoration-color: var(--accent);
+    }
+
+    .hero {
+      background: linear-gradient(to right, #840bda, #a55ae8);
+      color: white;
+      text-align: center;
+      padding: 7rem 2rem 6rem;
+      animation: fadeInDown 1s ease;
+      position: relative;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .cta-btn {
+      background: white;
+      color: var(--primary);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+      border-radius: 6px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .cta-btn:hover {
+      background: var(--accent);
+      color: white;
+      transform: scale(1.05);
+    }
+
+    section {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: var(--light);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .accordion-item {
+      border-radius: 8px;
+      overflow: hidden;
+      transition: 0.3s ease;
+      margin-bottom: 1rem; /* Ensure there's space between items */
+    }
+
+    .accordion-title {
+      padding: 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      background: var(--primary);
+      color: white;
+    }
+
+    .accordion-title:hover {
+      background: var(--accent);
+      transform: scale(1.05);
+    }
+
+    .accordion-content {
+      padding: 1rem;
+      display: none;
+      background: var(--light);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 2s ease-out, opacity 0.3s ease;
+      color: var(--text);
+    }
+
+    .accordion-item.active .accordion-content {
+      display: block;
+      animation: slideDown 2s ease-out forwards;
+    }
+
+    @keyframes slideDown {
+      0% {
+        max-height: 0;
+        opacity: 0;
+      }
+      100% {
+        max-height: 1000px; /* Adjust as per content height */
+        opacity: 1;
+      }
+    }
+
+    @keyframes grow {
+      0% {
+        transform: scaleY(0);
+        opacity: 0;
+      }
+      100% {
+        transform: scaleY(1);
+        opacity: 1;
+      }
+    }
+
+
+    .pricing, #faq .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: var(--background);
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    form {
+      max-width: 600px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    form input, form textarea {
+      padding: 0.75rem;
+      background: #121212;
+      border: 1px solid #333;
+      border-radius: 6px;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    form button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    footer {
+      background: #1a1a1a;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Accordion click event
+      document.querySelectorAll('.accordion-title').forEach(item => {
+        item.addEventListener('click', () => {
+          const parent = item.parentElement;
+          // Check if the clicked accordion is already active
+          if (parent.classList.contains('active')) {
+            parent.classList.remove('active');
+          } else {
+            // Remove 'active' class from all accordion items first
+            document.querySelectorAll('.accordion-item').forEach(acc => {
+              acc.classList.remove('active');
+            });
+            // Add 'active' to the clicked accordion item
+            parent.classList.add('active');
+          }
+        });
+      });
+
+      // Animate feature items on scroll
+      const features = document.querySelectorAll('#features .accordion-item');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      features.forEach(item => observer.observe(item));
+    });
+
+  </script>
+</head>
+<body>
+  <header>
+    <h1>SIM</h1>
+    <nav>
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero animate__animated animate__fadeInDown">
+    <h2>Contractor Project Management Simplified</h2>
+    <p>Everything you need to run your construction business in one app</p>
+    <a href="#pricing" class="cta-btn">View Pricing</a>
+  </section>
+
+  <section id="features">
+    <h2>Project Management Features</h2>
+    <div class="features">
+      <div class="accordion-item">
+        <div class="accordion-title">Scheduling</div>
+        <div class="accordion-content">
+          <h3>Finally – An easy to use Gantt chart project scheduler</h3>
+          <p>Yea, we all know time is money. But spending hundreds of dollars per year for CPM Gantt charts is a thing of the past. Take your project schedules with you and share them with your team – wherever you go.</p>
+
+          <div class="video-preview">
+            <button class="cta-btn">Play Video</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-title">Daily Logs</div>
+        <div class="accordion-content">Document weather, delays, notes, and worker tasks for every day.</div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-title">RFIs</div>
+        <div class="accordion-content">Submit and respond to RFIs with full documentation and tracking.</div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-title">Submittals</div>
+        <div class="accordion-content">Track submittal logs and responses from vendors and clients.</div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-title">Project Management Dashboard</div>
+        <div class="accordion-content">Get a bird's-eye view of progress, issues, and team responsibilities.</div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-title">Task Management</div>
+        <div class="accordion-content">Assign, track, and complete tasks with automatic notifications.</div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-title">Punch Lists</div>
+        <div class="accordion-content">Create and track punch list items with due dates and photos.</div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-title">Calendar Integration</div>
+        <div class="accordion-content">Sync with external calendars for better scheduling and visibility.</div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-title">Client Portal</div>
+        <div class="accordion-content">Give clients limited access to view progress, documents, and updates.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <h2>Simple Pricing</h2>
+    <div class="pricing">
+      <div class="card animate__animated animate__fadeInUp">
+        <h3>Starter</h3>
+        <p>$19/month</p>
+        <p>Basic features for small teams</p>
+      </div>
+      <div class="card animate__animated animate__fadeInUp animate__delay-1s">
+        <h3>Pro</h3>
+        <p>$49/month</p>
+        <p>Advanced features for growing businesses</p>
+      </div>
+      <div class="card animate__animated animate__fadeInUp animate__delay-2s">
+        <h3>Enterprise</h3>
+        <p>Contact Us</p>
+        <p>Custom solutions for large organizations</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About SIM</h2>
+    <p>SIM was founded by contractors who understand the real needs of the field. Our mission is to simplify project management for construction companies of all sizes.</p>
+  </section>
+
+  <section id="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="features">
+      <div class="card animate__animated animate__fadeInUp">
+        <h3>Do I need to install software?</h3>
+        <p>No. SIM is cloud-based and accessible from any browser.</p>
+      </div>
+      <div class="card animate__animated animate__fadeInUp animate__delay-1s">
+        <h3>Can I try before buying?</h3>
+        <p>Yes. We offer a 14-day free trial on all plans.</p>
+      </div>
+      <div class="card animate__animated animate__fadeInUp animate__delay-2s">
+        <h3>Do you offer customer support?</h3>
+        <p>Absolutely. Our support team is available 24/7 via email and chat.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="5" placeholder="Your Message"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 SIM. All rights reserved.</p>
+  </footer>
+</body>
+</html>
