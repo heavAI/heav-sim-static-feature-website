@@ -10,10 +10,10 @@
     :root {
       --primary: #840bda;
       --accent: #a55ae8;
-      --background: #0f0f0f;
-      --text: #f3f3f3;
+      --background: linear-gradient(135deg, #181c2b 0%, #232946 50%, #1a1a2e 100%);
+      --text: #f1f1f1;
       --muted: #999;
-      --light: #1e1e1e;
+      --light: #232946;
     }
 
     * {
@@ -28,19 +28,21 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: var(--background);
+      background: var(--background);
       color: var(--text);
       line-height: 1.6;
     }
 
     header {
-      background: var(--primary);
+      background: rgba(36, 37, 64, 0.92);
       color: white;
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
+      border-bottom: 1.5px solid #232323;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.12);
     }
 
     header h1 {
@@ -54,21 +56,23 @@
     }
 
     nav a {
-      color: white;
+      color: #fff;
       text-decoration: none;
-      font-weight: 500;
       font-weight: 700;
+      position: relative;
+      font-size: 1.08rem;
+      padding: 8px 0;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-bottom 0.2s;
     }
 
-    nav a:hover {
-      text-decoration: underline;
-      text-decoration-thickness: 3px;
-      text-underline-offset: 6px;
-      text-decoration-color: var(--accent);
+    nav a.active, nav a:hover {
+      color: var(--primary);
+      border-bottom: 2px solid var(--primary);
     }
 
     .hero {
-      background: linear-gradient(to right, #840bda, #a55ae8);
+      background: linear-gradient(120deg, #232946 60%, #a55ae8 100%);
       color: white;
       text-align: center;
       padding: 7rem 2rem 6rem;
@@ -87,8 +91,8 @@
     }
 
     .cta-btn {
-      background: white;
-      color: var(--primary);
+      background: var(--primary);
+      color: #fff;
       border: none;
       padding: 0.75rem 1.5rem;
       font-weight: 600;
@@ -110,6 +114,55 @@
       padding: 4rem 2rem;
       text-align: center;
       background: var(--light);
+      color: var(--text);
+      position: relative;
+    }
+
+    section:not(:last-of-type)::after {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      opacity: 0.25;
+      margin-top: 2rem;
+    }
+
+    section h2 {
+      color: #fff;
+      background: none;
+      font-size: 2.1rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      letter-spacing: 0.01em;
+      padding: 0;
+      display: inline-block;
+      position: relative;
+    }
+
+    section h2::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      border-radius: 2px;
+      margin: 12px auto 0 auto;
+      background: linear-gradient(90deg, #232946 0%, #840bda 60%, #181c2b 100%);
+      opacity: 1;
+    }
+
+    @media (max-width: 600px) {
+      section h2 {
+        font-size: 1.3rem;
+      }
+      section h2::after {
+        width: 36px;
+        height: 3px;
+      }
     }
 
     .features {
@@ -123,7 +176,9 @@
       border-radius: 8px;
       overflow: hidden;
       transition: 0.3s ease;
-      margin-bottom: 1rem; /* Ensure there's space between items */
+      margin-bottom: 1rem;
+      background: #232946;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
     }
 
     .accordion-title {
@@ -142,7 +197,7 @@
     .accordion-content {
       padding: 1rem;
       display: none;
-      background: var(--light);
+      background: #232946;
       max-height: 0;
       overflow: hidden;
       transition: max-height 2s ease-out, opacity 0.3s ease;
@@ -160,22 +215,10 @@
         opacity: 0;
       }
       100% {
-        max-height: 1000px; /* Adjust as per content height */
+        max-height: 1000px;
         opacity: 1;
       }
     }
-
-    @keyframes grow {
-      0% {
-        transform: scaleY(0);
-        opacity: 0;
-      }
-      100% {
-        transform: scaleY(1);
-        opacity: 1;
-      }
-    }
-
 
     .pricing, #faq .features {
       display: grid;
@@ -185,15 +228,17 @@
     }
 
     .card {
-      background: var(--background);
+      background: #232946;
       border-radius: 8px;
       padding: 2rem;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
       transition: transform 0.3s ease;
+      color: var(--text);
     }
 
     .card:hover {
       transform: translateY(-5px);
+      box-shadow: 0 8px 32px #840bda33;
     }
 
     form {
@@ -206,7 +251,7 @@
 
     form input, form textarea {
       padding: 0.75rem;
-      background: #121212;
+      background: #181c2b;
       border: 1px solid #333;
       border-radius: 6px;
       font-size: 1rem;
@@ -224,8 +269,8 @@
     }
 
     footer {
-      background: #1a1a1a;
-      color: white;
+      background: #181c2b;
+      color: #bdbdbd;
       text-align: center;
       padding: 2rem 1rem;
       margin-top: 4rem;
